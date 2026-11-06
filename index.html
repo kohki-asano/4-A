@@ -1,89 +1,26 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
-    <meta charset="UTF-8" />
-    <title>キーボードで動かす</title>
+    <meta charset="UTF-8">
+    <title>Week 5 canvas</title>
     <style>
-      .stage {
-        position: relative;
-        width: 600px;
-        height: 240px;
-        margin: 24px auto;
-        border: 2px solid #333;
-        background: #f6f8ff;
-        overflow: hidden;
+      body {
+        background-color: #0b1020;
+        color: #e8eeff;
+        font-family: sans-serif;
       }
-      #box {
-        position: absolute;
-        width: 48px;
-        height: 48px;
-        background: #ff6b6b;
-        border-radius: 8px;
+      canvas {
+        background-color: #111a33;
+        border: 1px solid #8899cc;
       }
     </style>
   </head>
   <body>
-    <p style="text-align: center">← / → で赤い四角が動きます</p>
-    <div class="stage" id="stage">
-      <div id="box"></div>
-    </div>
+    <h1>Week 5 canvas</h1>
+    <canvas id="stage" width="640" height="360"></canvas>
+    <p id="info"></p>
 
-    <script>
-      const box = document.getElementById("box");
-
-      let x = 50;          // 横の位置（状態）
-      let y = 96;          // 縦の位置（状態）
-      const speed = 4;     // 1回に動く量
-
-      const keys = {};     // 押されているキーを覚える入れ物（３-３のオブジェクト）
-
-      // 押したら true、離したら false を覚えておく（ここでは動かさない）
-      document.addEventListener("keydown", (e) => {
-        keys[e.code] = true;
-        console.log(keys);
-      });
-      document.addEventListener("keyup", (e) => {
-        keys[e.code] = false;
-      });
-
-      // 状態（x, y）から表示を決める
-      function draw() {
-        if (x < 0) {
-          x = 0;
-        }
-        if (x > 600 - 48) {
-          x = 600 - 48;
-        }
-        // y も同じように書く
-        if (y < 0) {
-          y = 0;
-        }
-        if (y > 240 - 48) {
-          y = 240 - 48;
-        }
-        box.style.left = x + "px";
-        box.style.top = y + "px";
-      }
-
-      // 一定の間隔（16ミリ秒ごと）に、押されているキーを見て動かす
-      //WASD追加
-      function update() {
-        if (keys["ArrowRight"] || keys["KeyD"]) {
-          x = x + speed;
-        }
-        if (keys["ArrowLeft"] || keys["KeyA"]) {
-          x = x - speed;
-        }
-        if (keys["ArrowDown"] || keys["KeyS"]) {
-          y = y + speed;
-        }
-        if (keys["ArrowUp"] || keys["KeyW"]) {
-          y = y - speed;
-        }
-        draw();
-      }
-
-      setInterval(update, 16);   // update を16ミリ秒ごとに呼ぶ（1秒に約60回）
-    </script>
+    <!-- 動かす js：課題ごとに、ここのファイル名を書き換える -->
+    <script src="5-A_bouncelab.js"></script>
   </body>
 </html>
