@@ -32,6 +32,14 @@ function update(dt) {
   }
 }
 
+document.addEventListener("keydown", (e) => {
+  if (e.code === "ArrowUp") {
+    vx = vx * 1.2;   // 速さを1.2倍（向きはそのまま）
+    vy = vy * 1.2;
+  }
+  // ここに、ほかのキーを足す
+});
+
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#ffd166";
