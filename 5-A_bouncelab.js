@@ -6,30 +6,35 @@ let y = 80;
 let vx = 180;         // 横の速さ（1秒に180px）
 let vy = 140;         // 縦の速さ（1秒に140px。＋ は下へ）
 const r = 14;         // 半径
+let color = "#ffd166";
 let last = performance.now();
 
 function update(dt) {
   x = x + vx * dt;
   y = y + vy * dt;
 
-  // 左右の壁（丸は x が中心なので、半径 r を足し引きする）
-  if (x + r > canvas.width) {
-    x = canvas.width - r;
-    vx = -vx;
-  }
-  if (x - r < 0) {
-    x = r;
-    vx = -vx;
-  }
-  // 上下の壁
-  if (y + r > canvas.height) {
-    y = canvas.height - r;
-    vy = -vy;
-  }
-  if (y - r < 0) {
-    y = r;
-    vy = -vy;
-  }
+    // 左右の壁（丸は x が中心なので、半径 r を足し引きする）
+    if (x + r > canvas.width) {
+        x = canvas.width - r;
+        vx = -vx;
+        color = color === "#ffd166" ? "#06d6a0" : "#ffd166";
+    }
+    if (x - r < 0) {
+      x = r;
+      vx = -vx;
+      color = color === "#ffd166" ? "#06d6a0" : "#ffd166";
+    }
+    // 上下の壁
+    if (y + r > canvas.height) {
+        y = canvas.height - r;
+        vy = -vy;
+        color = color === "#ffd166" ? "#06d6a0" : "#ffd166";
+    }
+    if (y - r < 0) {
+        y = r;
+        vy = -vy;
+        color = color === "#ffd166" ? "#06d6a0" : "#ffd166";
+    }
 }
 
 document.addEventListener("keydown", (e) => {
@@ -42,7 +47,7 @@ document.addEventListener("keydown", (e) => {
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#ffd166";
+    ctx.fillStyle = color;
     ctx.beginPath();
     ctx.arc(x, y, r, 0, Math.PI * 2);
     ctx.fill();
